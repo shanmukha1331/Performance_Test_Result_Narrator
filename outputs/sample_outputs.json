@@ -1,0 +1,11 @@
+{
+  "Performance Summary": {
+    "Average Response Time (ms)": 390,
+    "P50 Latency (ms)": 275,
+    "P95 Latency (ms)": 910,
+    "P99 Latency (ms)": 982,
+    "Error Rate (%)": 2,
+    "SLA Status": "Warning"
+  },
+  "AI Summary": "Executive Summary:\nThe system is experiencing high latency as indicated by elevated P95 Latency and P99 Latency metrics of 910.0 ms and 982.0 ms respectively. The Average Response Time is also high at 390.0 ms. The Error Rate is within a tolerable threshold at 2.0%.\n\nKey Observations:\n- P95 Latency is significantly higher than P50 Latency, indicating uneven response distribution.\n- The SLA Status is in a Warning state.\n- There is a noticeable increase in higher percentile latencies (P95, P99).\n\nRisk Assessment:\nMedium\nReason: The system is experiencing a Warning SLA Status according to the provided metrics.\n\nRecommended Actions:\n- Investigate the root cause of the high P95 and P99 latencies.\n- Review the system architecture to identify potential bottlenecks or areas for optimization.\n- Monitor the system for further degradation or improvement."
+}

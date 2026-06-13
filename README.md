@@ -328,9 +328,9 @@ streamlit run app.py
 ## Team Name : TeamInnovate 
 ## Project Title : QA-07 Quality Assurance - Performance Test Result Narrator
 ## Team Members:
-Member 1 : Polisetty Jahnavi
-Member 2 : Vasantha Rayapureddy
-Member 3 : Ramireddy Shanmukha
+* Member 1 : Polisetty Jahnavi
+* Member 2 : Vasantha Rayapureddy
+* Member 3 : Ramireddy Shanmukha
 
 ---
 

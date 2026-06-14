@@ -1,4 +1,4 @@
-from llm_helper import generate_summary
+from backend.llm_helper import generate_summary
 
 metrics = {
     "avg": 390,

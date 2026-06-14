@@ -1,4 +1,4 @@
-from analyser import analyze_performance
+from backend.analyser import analyze_performance
 
 data = {
     "response_times": [120,150,180,200,250,300,400,500,800,1000],

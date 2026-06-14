@@ -3,12 +3,11 @@ import os
 
 sys.path.append(
     os.path.abspath(
-        os.path.join(os.path.dirname(__file__), "..", "backend")
+        os.path.join(os.path.dirname(__file__), "..")
     )
 )
 
 from backend.analyser import analyze_performance
-
 
 def test_analyze_performance():
 

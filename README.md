@@ -336,7 +336,7 @@ streamlit run app.py
 
 ## 18. Demo Video
 
-Add video link here.
+Add video link here: https://youtu.be/Y1U7WBeGA1k?si=qxek3-8NyJ3kI5W5
 
 ---
 

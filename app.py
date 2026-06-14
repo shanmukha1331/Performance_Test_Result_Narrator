@@ -2,6 +2,7 @@ import json
 import os
 import sys
 from datetime import datetime
+from html import escape
 
 import streamlit as st
 
@@ -451,36 +452,73 @@ def get_recommended_actions(metrics):
 def build_executive_report(project_title, filename, metrics, ai_summary):
     generated_at = datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S %Z")
     recommended_actions = get_recommended_actions(metrics)
-    action_lines = "\n".join(
-        f"{index}. {action}" for index, action in enumerate(recommended_actions, start=1)
+    action_items = "".join(
+        f"<li>{escape(action)}</li>" for action in recommended_actions
     )
+    time_series_section = ""
+    if metrics.get("time_series_insights"):
+        time_series_section = f"""
+        <section>
+            <h2>Time-Series Insights</h2>
+            <p>{escape(metrics['time_series_insights']['narrative'])}</p>
+        </section>
+        """
 
-    return f"""# {project_title}
-
-**Generated:** {generated_at}  
-**Source Report:** {filename}
-
-## Performance Metrics
-
-| Metric | Value |
-|---|---:|
-| Average Response Time | {metrics['avg']:,.2f} ms |
-| P50 Latency | {metrics['p50']:,.2f} ms |
-| P95 Latency | {metrics['p95']:,.2f} ms |
-| P99 Latency | {metrics['p99']:,.2f} ms |
-| Error Rate | {metrics['error_rate']:,.2f}% |
-
-## SLA Status
-
-**{metrics['sla_status']}**
-
-## AI Executive Summary
-
-{ai_summary}
-
-## Recommended Actions
-
-{action_lines}
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{escape(project_title)}</title>
+    <style>
+        body {{ font-family: Arial, sans-serif; color: #1e293b; line-height: 1.6;
+                max-width: 900px; margin: 0 auto; padding: 40px; background: #f8fafc; }}
+        main {{ background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px;
+                padding: 32px; }}
+        h1, h2 {{ color: #2563eb; }}
+        .meta {{ color: #64748b; margin-bottom: 28px; }}
+        table {{ width: 100%; border-collapse: collapse; margin: 16px 0; }}
+        th, td {{ border: 1px solid #e2e8f0; padding: 10px 12px; text-align: left; }}
+        th {{ background: #eff6ff; }}
+        .status {{ display: inline-block; font-weight: bold; padding: 6px 12px;
+                   border-radius: 999px; background: #eff6ff; color: #1d4ed8; }}
+        .summary {{ white-space: pre-wrap; }}
+    </style>
+</head>
+<body>
+<main>
+    <h1>{escape(project_title)}</h1>
+    <div class="meta">
+        <strong>Generated:</strong> {escape(generated_at)}<br>
+        <strong>Source Report:</strong> {escape(filename)}
+    </div>
+    <section>
+        <h2>Performance Metrics</h2>
+        <table>
+            <tr><th>Metric</th><th>Value</th></tr>
+            <tr><td>Average Response Time</td><td>{metrics['avg']:,.2f} ms</td></tr>
+            <tr><td>P50 Latency</td><td>{metrics['p50']:,.2f} ms</td></tr>
+            <tr><td>P95 Latency</td><td>{metrics['p95']:,.2f} ms</td></tr>
+            <tr><td>P99 Latency</td><td>{metrics['p99']:,.2f} ms</td></tr>
+            <tr><td>Error Rate</td><td>{metrics['error_rate']:,.2f}%</td></tr>
+        </table>
+    </section>
+    <section>
+        <h2>SLA Status</h2>
+        <span class="status">{escape(metrics['sla_status'])}</span>
+    </section>
+    {time_series_section}
+    <section>
+        <h2>AI Executive Summary</h2>
+        <div class="summary">{escape(ai_summary)}</div>
+    </section>
+    <section>
+        <h2>Recommendations</h2>
+        <ol>{action_items}</ol>
+    </section>
+</main>
+</body>
+</html>
 """
 
 
@@ -551,14 +589,12 @@ try:
         metrics,
         ai_summary,
     )
-    report_filename = (
-        f"{os.path.splitext(uploaded_file.name)[0]}_executive_report.md"
-    )
+    report_filename = f"{os.path.splitext(uploaded_file.name)[0]}_executive_report.html"
     st.download_button(
         label="Download Executive Report",
         data=executive_report,
         file_name=report_filename,
-        mime="text/markdown",
+        mime="text/html",
         use_container_width=True,
     )
 

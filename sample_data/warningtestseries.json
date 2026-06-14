@@ -1,0 +1,12 @@
+{
+  "response_times": [250,300,350,450,700,850],
+  "requests": 5000,
+  "failed": 50,
+  "time_series": [
+    {"time":"10:00","latency":250},
+    {"time":"11:00","latency":300},
+    {"time":"12:00","latency":450},
+    {"time":"13:00","latency":700},
+    {"time":"14:00","latency":850}
+  ]
+}

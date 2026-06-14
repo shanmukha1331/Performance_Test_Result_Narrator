@@ -1,8 +1,8 @@
 import json
 import os
 import sys
+from datetime import datetime
 
-import pandas as pd
 import streamlit as st
 
 
@@ -417,6 +417,73 @@ def render_metric_cards(metrics):
     )
 
 
+def get_recommended_actions(metrics):
+    actions = []
+
+    if metrics["p95"] >= 1000:
+        actions.append(
+            "Prioritize investigation of the slowest requests contributing to critical P95 latency."
+        )
+    elif metrics["p95"] >= 500:
+        actions.append(
+            "Review high-latency transactions and optimize the paths contributing to P95 response time."
+        )
+    else:
+        actions.append(
+            "Continue monitoring P95 latency to confirm that current response-time performance remains stable."
+        )
+
+    if metrics["error_rate"] > 0:
+        actions.append(
+            "Analyze failed requests by endpoint and error type, then retest after corrective changes."
+        )
+    else:
+        actions.append(
+            "Maintain error-rate monitoring in future test runs to detect reliability regressions."
+        )
+
+    actions.append(
+        "Review this result alongside future test runs before approving production-impacting changes."
+    )
+    return actions
+
+
+def build_executive_report(project_title, filename, metrics, ai_summary):
+    generated_at = datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S %Z")
+    recommended_actions = get_recommended_actions(metrics)
+    action_lines = "\n".join(
+        f"{index}. {action}" for index, action in enumerate(recommended_actions, start=1)
+    )
+
+    return f"""# {project_title}
+
+**Generated:** {generated_at}  
+**Source Report:** {filename}
+
+## Performance Metrics
+
+| Metric | Value |
+|---|---:|
+| Average Response Time | {metrics['avg']:,.2f} ms |
+| P50 Latency | {metrics['p50']:,.2f} ms |
+| P95 Latency | {metrics['p95']:,.2f} ms |
+| P99 Latency | {metrics['p99']:,.2f} ms |
+| Error Rate | {metrics['error_rate']:,.2f}% |
+
+## SLA Status
+
+**{metrics['sla_status']}**
+
+## AI Executive Summary
+
+{ai_summary}
+
+## Recommended Actions
+
+{action_lines}
+"""
+
+
 st.markdown(
     """
     <div class="hero">
@@ -438,9 +505,9 @@ st.markdown(
 )
 
 uploaded_file = st.file_uploader(
-    "Upload performance JSON file",
+    "Upload Performance Result",
     type=["json"],
-    label_visibility="collapsed",
+    help="Upload the performance report to analyze.",
 )
 
 render_sidebar(uploaded_file)
@@ -477,6 +544,23 @@ try:
     with st.container(border=True):
         st.markdown('<div class="summary-heading">Executive Summary</div>', unsafe_allow_html=True)
         st.markdown(ai_summary)
+
+    executive_report = build_executive_report(
+        "Performance Test Result Narrator - Executive Report",
+        uploaded_file.name,
+        metrics,
+        ai_summary,
+    )
+    report_filename = (
+        f"{os.path.splitext(uploaded_file.name)[0]}_executive_report.md"
+    )
+    st.download_button(
+        label="Download Executive Report",
+        data=executive_report,
+        file_name=report_filename,
+        mime="text/markdown",
+        use_container_width=True,
+    )
 
 except (json.JSONDecodeError, KeyError, TypeError, ValueError) as error:
     st.error(

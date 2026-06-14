@@ -113,6 +113,9 @@ Performance Metrics
           │
           ▼
  Dashboard Output
+          │
+          ▼
+ Download Executive Report
 ```
 
 ---
@@ -226,8 +229,13 @@ Expected Output:
 * Critical SLA
 
 ---
+## 10. Report Export
 
-## 10. AI Prompt Engineering
+* Download AI-generated Executive Report (.md)
+* Includes Metrics, SLA Status, Executive Summary and Recommendations
+* Useful for stakeholder sharing and documentation
+
+## 11. AI Prompt Engineering
 
 The LLM receives:
 
@@ -247,7 +255,7 @@ The prompt instructs the model to:
 
 ---
 
-## 11. Assumptions
+## 12. Assumptions
 
 * Uploaded files are valid JSON.
 * Input follows supported schema.
@@ -256,7 +264,7 @@ The prompt instructs the model to:
 
 ---
 
-## 12. Limitations
+## 13. Limitations
 
 * Prototype implementation.
 * Supports only custom JSON and k6-style JSON.
@@ -266,18 +274,21 @@ The prompt instructs the model to:
 
 ---
 
-## 13. Future Enhancements
+## 14. Future Enhancements
 
-* SQLite-based report history
-* PDF report generation
-* Multi-file comparison
-* Trend analysis
-* JMeter XML support
-* Export to Markdown/PDF
+* SQLite-based report history and storage
+* Time-series performance analysis across multiple test runs
+* Automated bottleneck detection and root-cause suggestions
+* Multi-file performance comparison
+* Historical trend analysis dashboard
+* PDF and HTML report generation
+* Full JMeter XML support
+* Performance anomaly detection using AI
+* Team collaboration and report sharing features
 
 ---
 
-## 14. AI Capability Demonstrated
+## 15. AI Capability Demonstrated
 
 This project demonstrates:
 
@@ -289,7 +300,7 @@ This project demonstrates:
 
 ---
 
-## 15. Setup Instructions
+## 16. Setup Instructions
 
 ### Install Dependencies
 
@@ -313,7 +324,7 @@ streamlit run app.py
 
 ---
 
-## 16. Demo Flow
+## 17. Demo Flow
 
 1. Launch Streamlit application.
 2. Upload performance JSON.
@@ -324,7 +335,7 @@ streamlit run app.py
 
 ---
 
-## 17. Team Information 
+## 18. Team Information 
 ## Project Title : QA-07 Quality Assurance - Performance Test Result Narrator
 ## Team Members:
 * Member 1 : Polisetty Jahnavi
@@ -333,16 +344,18 @@ streamlit run app.py
 
 ---
 
-## 18. Demo Video
+## 19. Demo Video
 
 Add video link here: https://youtu.be/Y1U7WBeGA1k?si=qxek3-8NyJ3kI5W5
 
+## Note:
+A downloadable Executive Report feature was added as a final enhancement after the demo video recording.
 ---
 
-## 19. Repository
+## 20. Repository
 
 GitHub Repository:
 https://github.com/JahnaviPolisetty/Performance_Test_Result_Narrator
 
-## 20. Live Link
+## 21. Live Link
 Link : https://jahnavipolisetty-performance-test-result-narrator-app-8srvmf.streamlit.app/

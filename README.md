@@ -48,7 +48,7 @@ QA-07 Quality Assurance – Performance Test Result Narrator
 
 * Polisetty Jahnavi
 * Vasantha Rayapureddy
-* Ramireddy Shanmukha
+* Shanmukha Ramireddy
 
 ---
 
@@ -405,5 +405,3 @@ https://github.com/JahnaviPolisetty/Performance_Test_Result_Narrator
 ## 19. Live Application
 
 https://jahnavipolisetty-performance-test-result-narrator-app-8srvmf.streamlit.app/
-## Contributor
-Updated README by Shanmukha.

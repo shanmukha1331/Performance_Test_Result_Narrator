@@ -380,17 +380,7 @@ streamlit run app.py
 ---
 
 ## 17. Demo Video
-
-https://youtu.be/Y1U7WBeGA1k?si=qxek3-8NyJ3kI5W5
-
-### Important Note
-
-The demo video was recorded before the final implementation of:
-
-* Time-Series Analysis
-* HTML Executive Report Generation
-
-These enhancements are available in the latest GitHub repository and deployed application.
+Drive Link : 
 
 ---
 

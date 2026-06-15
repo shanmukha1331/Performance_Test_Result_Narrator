@@ -47,7 +47,7 @@ QA-07 Quality Assurance – Performance Test Result Narrator
 ### Team Members
 
 * Polisetty Jahnavi
-* Vasantha Rayapureddy
+* Rayapureddy Vasantha 
 * Ramireddy Shanmukha
 
 ---

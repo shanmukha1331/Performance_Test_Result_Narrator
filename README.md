@@ -48,7 +48,7 @@ QA-07 Quality Assurance – Performance Test Result Narrator
 
 * Polisetty Jahnavi
 * Vasantha Rayapureddy
-* Shanmukha Ramireddy
+* Ramireddy Shanmukha
 
 ---
 
